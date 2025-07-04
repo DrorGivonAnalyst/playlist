@@ -73,34 +73,23 @@ button {
   <img src="cover.jpeg" alt="תמונת פלייליסט" style="max-width: 600px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
 </div>
 <div style="text-align:center; margin-bottom: 30px;">
-  <button onclick="startPlaylist()" style="
-    background-color: #1db954;
-    color: white;
-    font-size: 18px;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    margin: 0 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  ">
+  <button onclick="startPlaylist()" style="background-color:#1db954; color:white; font-size:18px; padding:12px 24px; border:none; border-radius:30px; cursor:pointer; margin:0 10px; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
     ▶️ התחל לנגן
   </button>
 
-  <button onclick="nextSong()" style="
-    background-color: #404040;
-    color: white;
-    font-size: 18px;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    margin: 0 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  ">
+  <button onclick="nextSong()" style="background-color:#404040; color:white; font-size:18px; padding:12px 24px; border:none; border-radius:30px; cursor:pointer; margin:0 10px; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
     ⏭️ השיר הבא
   </button>
+
+  <button onclick="stopAll()" style="background-color:#d32f2f; color:white; font-size:18px; padding:12px 24px; border:none; border-radius:30px; cursor:pointer; margin:0 10px; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
+    ⏹️ עצור הכול
+  </button>
+
+  <button onclick="toggleLoop()" id="loopBtn" style="background-color:#616161; color:white; font-size:18px; padding:12px 24px; border:none; border-radius:30px; cursor:pointer; margin:0 10px; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
+    🔁 הפעל בלולאה
+  </button>
 </div>
+
 
   <div class="container" id="playlist">
 
@@ -163,12 +152,17 @@ button {
 <script>
   const audios = document.querySelectorAll("audio");
   let currentIndex = 0;
+  let loopMode = false;
 
-  // מעבר אוטומטי בין שירים
+  // מעבר אוטומטי לשיר הבא
   for (let i = 0; i < audios.length; i++) {
     audios[i].addEventListener("ended", () => {
       if (i + 1 < audios.length) {
         currentIndex = i + 1;
+        audios[currentIndex].play();
+        scrollToAudio(currentIndex);
+      } else if (loopMode) {
+        currentIndex = 0;
         audios[currentIndex].play();
         scrollToAudio(currentIndex);
       }
@@ -176,6 +170,7 @@ button {
   }
 
   function startPlaylist() {
+    stopAll(); // רק ליתר ביטחון
     currentIndex = 0;
     audios[currentIndex].play();
   }
@@ -189,6 +184,20 @@ button {
     scrollToAudio(currentIndex);
   }
 
+  function stopAll() {
+    audios.forEach(audio => {
+      audio.pause();
+      audio.currentTime = 0;
+    });
+  }
+
+  function toggleLoop() {
+    loopMode = !loopMode;
+    const loopBtn = document.getElementById("loopBtn");
+    loopBtn.style.backgroundColor = loopMode ? "#1db954" : "#616161";
+    loopBtn.innerText = loopMode ? "🔁 לולאה פעילה" : "🔁 הפעל בלולאה";
+  }
+
   function scrollToAudio(index) {
     window.scrollTo({
       top: audios[index].parentElement.offsetTop - 20,
@@ -196,6 +205,7 @@ button {
     });
   }
 </script>
+
 
 
 </body>
