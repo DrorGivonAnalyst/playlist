@@ -2,7 +2,7 @@
 <html lang="he">
 <head>
   <meta charset="UTF-8">
-  <title>🎧קונספציה 2025 מחזור ב</title>
+  <title>🎧 קונספציה 2025 מחזור ב</title>
   <style>
     body {
       direction: rtl;
@@ -60,29 +60,29 @@
   </style>
 </head>
 <body>
-  <h1>🎶🎧קונספציה 2025 מחזור ב 🎶</h1>
+  <h1>🎶 קונספציה 2025 מחזור ב 🎶</h1>
 
-  <div class="container">
+  <div class="container" id="playlist">
 
     <div class="song">
-      <h3>ביום ובלילה אינסטרומנטלי</h3>
-    <audio controls autoplay>
-  <source src="music/bayom.mp3" type="audio/mpeg">
-</audio>
+      <h3>ביום ובלילה</h3>
+      <audio controls>
+        <source src="music/bayom.mp3" type="audio/mpeg">
+      </audio>
     </div>
 
     <div class="song">
       <h3>Everybody Wants To Rule The World</h3>
-    <audio controls>
-  <source src="music/everybody.mp3" type="audio/mpeg">
-</audio>
+      <audio controls>
+        <source src="music/everybody.mp3" type="audio/mpeg">
+      </audio>
     </div>
 
     <div class="song">
       <h3>I'm Still Standing</h3>
-    <audio controls>
-  <source src="music/still.mp3" type="audio/mpeg">
-</audio>
+      <audio controls>
+        <source src="music/still.mp3" type="audio/mpeg">
+      </audio>
     </div>
 
     <div class="song">
@@ -95,7 +95,7 @@
     <div class="song">
       <h3>Shake It Off</h3>
       <audio controls>
-         <source src="music/shake.mp3" type="audio/mpeg">
+        <source src="music/shake.mp3" type="audio/mpeg">
       </audio>
     </div>
 
@@ -109,7 +109,7 @@
     <div class="song">
       <h3>גנרלית מרתון</h3>
       <audio controls>
-       <source src="music/general.mp3" type="audio/mpeg">
+        <source src="music/general.mp3" type="audio/mpeg">
       </audio>
     </div>
 
@@ -118,5 +118,28 @@
   <footer>
     נבנה באהבה על ידי <a href="https://github.com/DrorGivonAnalyst" target="_blank">דרור גבעון</a>
   </footer>
+
+  <script>
+    const audios = document.querySelectorAll("audio");
+
+    for (let i = 0; i < audios.length; i++) {
+      audios[i].addEventListener("ended", () => {
+        if (i + 1 < audios.length) {
+          audios[i + 1].play();
+          window.scrollTo({
+            top: audios[i + 1].parentElement.offsetTop - 20,
+            behavior: 'smooth'
+          });
+        }
+      });
+    }
+
+    // הפעלת השיר הראשון אוטומטית
+    window.onload = () => {
+      audios[0].play().catch(() => {
+        console.log("Autoplay blocked. User must interact first.");
+      });
+    };
+  </script>
 </body>
 </html>
