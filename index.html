@@ -162,24 +162,41 @@ button {
 
 <script>
   const audios = document.querySelectorAll("audio");
+  let currentIndex = 0;
 
   // מעבר אוטומטי בין שירים
   for (let i = 0; i < audios.length; i++) {
     audios[i].addEventListener("ended", () => {
       if (i + 1 < audios.length) {
-        audios[i + 1].play();
-        window.scrollTo({
-          top: audios[i + 1].parentElement.offsetTop - 20,
-          behavior: 'smooth'
-        });
+        currentIndex = i + 1;
+        audios[currentIndex].play();
+        scrollToAudio(currentIndex);
       }
     });
   }
 
   function startPlaylist() {
-    audios[0].play();
+    currentIndex = 0;
+    audios[currentIndex].play();
+  }
+
+  function nextSong() {
+    audios[currentIndex].pause();
+    audios[currentIndex].currentTime = 0;
+
+    currentIndex = (currentIndex + 1) % audios.length;
+    audios[currentIndex].play();
+    scrollToAudio(currentIndex);
+  }
+
+  function scrollToAudio(index) {
+    window.scrollTo({
+      top: audios[index].parentElement.offsetTop - 20,
+      behavior: 'smooth'
+    });
   }
 </script>
+
 
 </body>
 </html>
