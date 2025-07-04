@@ -2,68 +2,121 @@
 <html lang="he">
 <head>
   <meta charset="UTF-8">
-  <title>Conception Playlist/title>
+  <title>🎧 הפלייליסט של דרור</title>
   <style>
     body {
       direction: rtl;
-      font-family: Arial;
-      background: #f0f8ff;
-      padding: 30px;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      padding: 20px;
     }
+
     h1 {
       text-align: center;
-      color: #0d47a1;
+      color: #1db954;
+      margin-bottom: 40px;
     }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+    }
+
     .song {
-      background: #ffffff;
-      border-radius: 10px;
-      margin: 20px auto;
-      padding: 15px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      max-width: 600px;
+      background-color: #1e1e1e;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      padding: 15px 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
+
+    .song h3 {
+      margin: 0 0 10px 0;
+      color: #ffffff;
+    }
+
     audio {
       width: 100%;
+      outline: none;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 14px;
+      color: #888;
+    }
+
+    a {
+      color: #1db954;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <h1>רשימת שירים</h1>
+  <h1>🎶 הפלייליסט של דרור 🎶</h1>
 
-  <div class="song">
-    <h3>ביום ובלילה אינסטרומנטלי</h3>
-    <audio controls src="music/bayom_ubalaila.mp3"></audio>
+  <div class="container">
+
+    <div class="song">
+      <h3>ביום ובלילה</h3>
+      <audio controls autoplay>
+        <source src="music/bayom_ubalaila.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+
+    <div class="song">
+      <h3>Everybody Wants To Rule The World</h3>
+      <audio controls>
+        <source src="music/everybody_wants.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+
+    <div class="song">
+      <h3>I'm Still Standing</h3>
+      <audio controls>
+        <source src="music/still_standing.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+
+    <div class="song">
+      <h3>Counting Stars</h3>
+      <audio controls>
+        <source src="music/counting_stars.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+
+    <div class="song">
+      <h3>Shake It Off</h3>
+      <audio controls>
+        <source src="music/shake_it_off.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+
+    <div class="song">
+      <h3>You Give Love A Bad Name</h3>
+      <audio controls>
+        <source src="music/you_give_love.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+
+    <div class="song">
+      <h3>גנרלית מרתון</h3>
+      <audio controls>
+        <source src="music/generaleet_marathon.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+
   </div>
 
-  <div class="song">
-    <h3>Everybody Wants To Rule The World</h3>
-    <audio controls src="music/everybody_wants.mp3"></audio>
-  </div>
-
-  <div class="song">
-    <h3>I'm Still Standing</h3>
-    <audio controls src="music/still_standing.mp3"></audio>
-  </div>
-
-  <div class="song">
-    <h3>Counting Stars</h3>
-    <audio controls src="music/counting_stars.mp3"></audio>
-  </div>
-
-  <div class="song">
-    <h3>Shake It Off</h3>
-    <audio controls src="music/shake_it_off.mp3"></audio>
-  </div>
-
-  <div class="song">
-    <h3>You Give Love A Bad Name</h3>
-    <audio controls src="music/you_give_love.mp3"></audio>
-  </div>
-
-  <div class="song">
-    <h3>גנרלית למרתון</h3>
-    <audio controls src="music/generaleet_marathon.mp3"></audio>
-  </div>
-
+  <footer>
+    נבנה באהבה על ידי <a href="https://github.com/DrorGivonAnalyst" target="_blank">דרור גבעון</a>
+  </footer>
 </body>
 </html>
