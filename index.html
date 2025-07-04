@@ -64,6 +64,21 @@
 <div style="text-align:center; margin-bottom: 30px;">
   <img src="cover.jpeg" alt="תמונת פלייליסט" style="max-width: 50%; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
 </div>
+<div style="text-align:center; margin-bottom: 30px;">
+  <button onclick="startPlaylist()" style="
+    background-color: #1db954;
+    color: white;
+    font-size: 18px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  ">
+    ▶️ התחל לנגן
+  </button>
+</div>
+
   <div class="container" id="playlist">
 
     <div class="song">
@@ -122,27 +137,26 @@
     נבנה באהבה על ידי <a href="https://github.com/DrorGivonAnalyst" target="_blank">דרור גבעון</a>
   </footer>
 
-  <script>
-    const audios = document.querySelectorAll("audio");
+<script>
+  const audios = document.querySelectorAll("audio");
 
-    for (let i = 0; i < audios.length; i++) {
-      audios[i].addEventListener("ended", () => {
-        if (i + 1 < audios.length) {
-          audios[i + 1].play();
-          window.scrollTo({
-            top: audios[i + 1].parentElement.offsetTop - 20,
-            behavior: 'smooth'
-          });
-        }
-      });
-    }
+  // מעבר אוטומטי בין שירים
+  for (let i = 0; i < audios.length; i++) {
+    audios[i].addEventListener("ended", () => {
+      if (i + 1 < audios.length) {
+        audios[i + 1].play();
+        window.scrollTo({
+          top: audios[i + 1].parentElement.offsetTop - 20,
+          behavior: 'smooth'
+        });
+      }
+    });
+  }
 
-    // הפעלת השיר הראשון אוטומטית
-    window.onload = () => {
-      audios[0].play().catch(() => {
-        console.log("Autoplay blocked. User must interact first.");
-      });
-    };
-  </script>
+  function startPlaylist() {
+    audios[0].play();
+  }
+</script>
+
 </body>
 </html>
