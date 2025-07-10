@@ -142,4 +142,81 @@
     <button onclick="nextSong()" style="background-color:#404040;">⏭️ השיר הבא</button>
     <br><br>
     <button onclick="stopAll()" style="background-color:#d32f2f;">⏹️ עצור הכול</button>
-    <button onclick="toggleLoop()" id="loopBtn" style="background-color:#61
+    <button onclick="toggleLoop()" id="loopBtn" style="background-color:#616161;">🔁 הפעל בלולאה</button>
+  </div>
+
+  <div class="container" id="playlist">
+    <div class="song"><h3>Drops Of Jupiter</h3><audio controls><source src="music/drops.mp3" type="audio/mpeg" /></audio></div>
+    <div class="song"><h3>You Give Love A Bad Name</h3><audio controls><source src="music/love.mp3" type="audio/mpeg" /></audio></div>
+    <div class="song"><h3>Shake It Off</h3><audio controls><source src="music/shake.mp3" type="audio/mpeg" /></audio></div>
+    <div class="song"><h3>Everybody Wants To Rule The World</h3><audio controls><source src="music/everybody.mp3" type="audio/mpeg" /></audio></div>
+    <div class="song"><h3>Counting Stars</h3><audio controls><source src="music/stars.mp3" type="audio/mpeg" /></audio></div>
+    <div class="song"><h3>ביום ובלילה אינסטורמנטלי</h3><audio controls><source src="music/bayom.mp3" type="audio/mpeg" /></audio></div>
+    <div class="song"><h3>I'm Still Standing</h3><audio controls><source src="music/still.mp3" type="audio/mpeg" /></audio></div>
+    <div class="song">
+      <h3>גנרלית מרתון</h3>
+      <h4>Everybody Wants To Rule The World, Counting Stars, ביום ובלילה</h4>
+      <audio controls><source src="music/general.mp3" type="audio/mpeg" /></audio>
+    </div>
+  </div>
+
+  <footer>
+    נבנה באהבה על ידי <a href="https://github.com/DrorGivonAnalyst" target="_blank">דרור גבעון</a>
+  </footer>
+
+  <script>
+    const audios = document.querySelectorAll("audio");
+    let currentIndex = 0;
+    let loopMode = false;
+
+    for (let i = 0; i < audios.length; i++) {
+      audios[i].addEventListener("ended", () => {
+        if (i + 1 < audios.length) {
+          currentIndex = i + 1;
+          audios[currentIndex].play();
+          scrollToAudio(currentIndex);
+        } else if (loopMode) {
+          currentIndex = 0;
+          audios[currentIndex].play();
+          scrollToAudio(currentIndex);
+        }
+      });
+    }
+
+    function startPlaylist() {
+      stopAll();
+      currentIndex = 0;
+      audios[currentIndex].play();
+    }
+
+    function nextSong() {
+      audios[currentIndex].pause();
+      audios[currentIndex].currentTime = 0;
+      currentIndex = (currentIndex + 1) % audios.length;
+      audios[currentIndex].play();
+      scrollToAudio(currentIndex);
+    }
+
+    function stopAll() {
+      audios.forEach(audio => {
+        audio.pause();
+        audio.currentTime = 0;
+      });
+    }
+
+    function toggleLoop() {
+      loopMode = !loopMode;
+      const loopBtn = document.getElementById("loopBtn");
+      loopBtn.style.backgroundColor = loopMode ? "#1db954" : "#616161";
+      loopBtn.innerText = loopMode ? "🔁 לולאה פעילה" : "🔁 הפעל בלולאה";
+    }
+
+    function scrollToAudio(index) {
+      window.scrollTo({
+        top: audios[index].parentElement.offsetTop - 20,
+        behavior: 'smooth'
+      });
+    }
+  </script>
+</body>
+</html>
